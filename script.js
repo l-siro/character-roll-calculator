@@ -69,7 +69,7 @@ function copyToClipboard(text) {
 
 
 function copyToClipboard2() {
-  var textToCopy = "x3 3d4+3d4+3d6+3d6+3d6+2d3+2d6+3d6+3d6";
+  var textToCopy = "x3 3s6+3d6+3d6+3d6+3d6+2d6+2d6+2d6+3d6";
   navigator.clipboard.writeText(textToCopy);
 
   var notification = document.getElementById("clipboard__notification");
