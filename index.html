@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dice Roll Calculator</title>
+  <style>
+    .output {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <input id="diceInput" type="text" placeholder="Enter dice roll results" size="100">
+  <button onclick="calculateStats()">Calculate Stats</button>
+  <div class="output" id="output"></div>
+
+  <script>
+    const STAT_NAMES = ['STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'LUCK', 'LUCK2'];
+
+    function calculateStats() {
+      let input = document.getElementById("diceInput").value;
+      let diceRolls = input.split('>').slice(1); // Remove the dice throw formula
+
+      diceRolls = diceRolls.map(roll => {
+        let rollParts = roll.split('[');
+        let rollValue = parseInt(rollParts[0]);
+        let diceCount = rollParts[1].split(',').length;
+
+        // If dice count is 2, add 6 to the roll value
+        if (diceCount === 2) {
+          rollValue += 6;
+        }
+        return rollValue * 5; // Multiply the roll value by 5
+      });
+
+      displayStats(diceRolls);
+    }
+
+    function displayStats(stats) {
+      let outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = '';
+      for (let i = 0; i < stats.length; i++) {
+        let p = document.createElement('p');
+        p.innerText = STAT_NAMES[i] + ': ' + stats[i];
+        outputDiv.appendChild(p);
+      }
+    }
+  </script>
+</body>
+
+</html>
