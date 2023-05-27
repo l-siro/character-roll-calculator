@@ -3,50 +3,41 @@
 
 <head>
   <title>Dice Roll Calculator</title>
-  <style>
-    .output {
-      margin-top: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 
 <body>
-  <input id="diceInput" type="text" placeholder="Enter dice roll results" size="100">
-  <button onclick="calculateStats()">Calculate Stats</button>
-  <div class="output" id="output"></div>
+  <div class="wrap">
+    <h2 class="section__ttl">能力値計算機</h2>
+    <div class="section__body">
+      <div class="clipboard__button" onclick="copyToClipboard2()">ココフォリア用のコードをコピー</div>
+      <div id="clipboard__notification" class="clipboard__notification">コードをコピーしました！</div>
+      <input id="diceInput" type="text" placeholder="Enter dice code" size="100">
+      <button onclick="calculateStats()" class="calc-button">能力値を計算</button>
+      <div class="output" id="output"></div>
+      <div id="copiedMessage" class="copied"></div>
+    </div>
 
-  <script>
-    const STAT_NAMES = ['STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'LUCK', 'LUCK2'];
 
-    function calculateStats() {
-      let input = document.getElementById("diceInput").value;
-      let diceRolls = input.split('>').slice(1); // Remove the dice throw formula
-
-      diceRolls = diceRolls.map(roll => {
-        let rollParts = roll.split('[');
-        let rollValue = parseInt(rollParts[0]);
-        let diceCount = rollParts[1].split(',').length;
-
-        // If dice count is 2, add 6 to the roll value
-        if (diceCount === 2) {
-          rollValue += 6;
-        }
-        return rollValue * 5; // Multiply the roll value by 5
-      });
-
-      displayStats(diceRolls);
-    }
-
-    function displayStats(stats) {
-      let outputDiv = document.getElementById("output");
-      outputDiv.innerHTML = '';
-      for (let i = 0; i < stats.length; i++) {
-        let p = document.createElement('p');
-        p.innerText = STAT_NAMES[i] + ': ' + stats[i];
-        outputDiv.appendChild(p);
-      }
-    }
-  </script>
+    <h2 class="section__ttl">使い方</h2>
+    <div class="section__body">
+      <h3 class="section__subttl">ココフォリアからダイスコードを取得する方法</h3>
+      <p>1...メッセージ入力欄に[ココフォリア用のコードをコピー]ボタンでコピーしたコードを貼り付けて送信してください。</p>
+      <p>2...出力された3つの結果の中から気に入ったコードを選択してください。</p>
+      <p>3...[#任意の数字]の下を何回かクリックすると必要な範囲が選択されます。コピーしてください。</p>
+      <p class="sample">コピーするダイスコードの例<br>(3D4+3D4+3D6+3D6+3D6+2D3+2D6+3D6+3D6) ＞
+        5[1,1,3]+8[3,3,2]+11[4,6,1]+14[6,2,6]+11[5,5,1]+3[2,1]+6[2,4]+5[2,2,1]+5[3,1,1] ＞ 68</p>
+      <h3 class="section__subttl">このツールの使い方</h3>
+      <p>1...「Enter dice code」にダイスコードを入力</p>
+      <p>2...「能力値を計算」ボタンを押してください。計算された能力値がテーブル形式で出力されます。</p>
+      <p>3... 能力値をクリックすることで、値がクリップボードにコピーされたます。</p>
+    </div>
+  </div>
 </body>
 
 </html>
