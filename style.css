@@ -15,6 +15,18 @@ body h2:first-child {
   max-width: 1000px;
   margin: 0 auto;
 }
+a,
+a:visited,
+a:active,
+a:focus { 
+  color: #4CAF50;
+  text-decoration: none;
+}
+a:hover {
+
+  color: #3e8e41;
+}
+
 
 .section__ttl {
   margin-top: 40px;
