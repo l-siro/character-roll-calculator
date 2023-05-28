@@ -47,31 +47,41 @@ function displayStats(stats, hp, db) {
 // ロール結果を取得する
 function calculateStats() {
   let input = document.getElementById("diceInput").value;
-  let diceRolls = input.split(' ＞ ')[1].split('+'); // ロール結果を取得
 
-  diceRolls = diceRolls.map(roll => {
-    let rollParts = roll.split('[');
-    let rollValue = parseInt(rollParts[0]);
-    let diceCount = rollParts[1].split(',').length;
+  // Split the input by # to handle multiple roll results
+  let rollInputs = input.split('#');
 
-    // もしダイスが2つなら、ダイスの目を6倍する
-    if (diceCount === 2) {
-      rollValue += 6;
-    }
-    return rollValue * 5; // ５倍する
-  });
+  for (let j = 0; j < rollInputs.length; j++) {
+    if (rollInputs[j].trim() === '') continue;  // skip empty sections
 
-  // HPを計算する
-  let hp = calculateHP(diceRolls[1], diceRolls[5]);
+    let diceRolls = rollInputs[j].split(' ＞ ')[1].split('+'); // ロール結果を取得
 
-  // DBを計算する
-  let db = calculateDB(diceRolls[0], diceRolls[5]);
+    diceRolls = diceRolls.map(roll => {
+      let rollParts = roll.split('[');
+      let rollValue = parseInt(rollParts[0]);
+      let diceCount = rollParts[1].split(',').length;
 
-  displayStats(diceRolls, hp, db);
+      // もしダイスが2つなら、ダイスの目を6倍する
+      if (diceCount === 2) {
+        rollValue += 6;
+      }
+      return rollValue * 5; // ５倍する
+    });
+
+    // HPを計算する
+    let hp = calculateHP(diceRolls[1], diceRolls[5]);
+
+    // DBを計算する
+    let db = calculateDB(diceRolls[0], diceRolls[5]);
+
+    displayStats(diceRolls, hp, db);
+  }
 
   // ボタンが押された後、入力エリアを空にする
   document.getElementById("diceInput").value = '';
 }
+
+
 
 // HPを計算する
 function calculateHP(con, siz) {
