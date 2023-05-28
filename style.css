@@ -75,6 +75,10 @@ body h2:first-child {
   margin-top: 20px;
 }
 
+.output .number {
+  margin-top: 20px;
+}
+
 .copied {
   margin-top: 20px;
   color: green;
@@ -83,7 +87,7 @@ body h2:first-child {
 }
 
 table {
-  margin-top: 20px;
+  margin-top: 10px;
   border-collapse: collapse;
   width: 100%;
 }
