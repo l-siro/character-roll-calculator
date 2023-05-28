@@ -1,3 +1,22 @@
+
+window.onload = function () {
+  var modal = document.getElementById('modal');
+  var agreeBtn = document.getElementById('agree');
+
+  modal.style.display = "block";
+
+  agreeBtn.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  // window.onclick = function (event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
+}
+
+
 const STAT_NAMES = ['STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', '幸運'];
 let tableCount = 0;
 
